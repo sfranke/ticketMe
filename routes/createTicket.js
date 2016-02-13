@@ -41,7 +41,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
 
-    console.log(req.body);
+    // console.log(req.body);
 
     var ticketDetails = req.body;
     
@@ -81,7 +81,7 @@ router.post('/', function (req, res, next) {
 
                 // console.log('saveTicket error:', error);
                 // console.log('saveTicket response:', response);
-                console.log('=====================\n', response.ops[0]);
+                // console.log('=====================\n', response.ops[0]);
 
                 io.emit('newTicketCreated', response.ops[0]);
                 

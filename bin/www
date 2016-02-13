@@ -7,12 +7,14 @@
 var app = require('../app');
 var debug = require('debug')('login:server');
 var http = require('http');
+var colors = require('colors');
+var util = require('util');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '1337');
+var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
@@ -25,10 +27,6 @@ io = require('socket.io')(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
-io.on('connection', function () {
-  console.log('Connection established!');
-  //io.emit('news', {msg: 'News message!'});
-});
 
 server.listen(port);
 server.on('error', onError);
@@ -92,4 +90,16 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log(colors.dim('Listening @ port:', port));
 }
+
+/**
+ * Event listener for socket.io "connect" event.
+ */
+io.on('connect', function (socket) {
+  //console.log(socket);
+  console.log(colors.dim('Client connected via socket.id:', socket.id));
+  //console.log(colors.bold('Client socket.id:', socket.client.conn.id));
+  //console.log(colors.bold('Available events:', util.inspect(socket.nsp._events)));
+  //console.log(colors.bold('Client count:', socket.server.eio.clientsCount));
+});

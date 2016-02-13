@@ -18,11 +18,11 @@ router.post('/', function (req, res, next) {
 
         if (user != null) {
             if (bcrypt.compareSync(req.body.password, user.password) == true) {
-                console.log('Password correct!');
+                console.log('Password correct!'.green.bold);
                 req.session.user = user;
                 res.redirect('/dashboard');
             } else {
-                console.log('Wrong password!');
+                console.log('Wrong password!'.bold.red);
                 return res.redirect('/register');
             }
         } else {
