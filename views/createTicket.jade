@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  .container
+    .jumbotron
+      .container
+        h1= title
+
+    .panel.panel-default#ticket
+      .panel-heading
+        .panel-body
+          form.form-horizontal(method='post')
+            .form-group
+              label.col-sm-2.control-label(for='dept') Category
+              |                 
+              .col-sm-3
+                select#ticketCategories.form-control(name='category')
+                  - each category in categories
+                    | 
+                    option(value='#{category}') #{category}
+                    |        
+            |             
+            .form-group
+              label.col-sm-2.control-label(for='dept') Department
+              |                 
+              .col-sm-3
+                select#ticketAssignee.form-control(name='department')
+                  - each department in departments
+                    | 
+                    option(value='#{department}') #{department}
+                    |        
+            |   
+            .form-group
+              label.col-sm-2.control-label(for='dept') Assignee
+              |                 
+              .col-sm-3
+                select#ticketAssignee.form-control(name='assignee')
+                  - each assignee in assignees
+                    | 
+                    option(value='#{assignee.name}') #{assignee.name}
+                    |        
+            |             
+            .form-group
+              label.col-sm-2.control-label(for='subj') Subject
+              |                 
+              .col-sm-3
+                input#subj.form-control(type='text', name='subject', value='')
+            |             
+            .form-group
+              label.col-sm-2.control-label(for='subj') Issue
+              |                 
+              .col-sm-5
+                textarea#issue.form-control(style='height: 100px;', name='issue')
+            |             
+            .form-group
+              .col-sm-offset-2.col-sm-10
+                button.btn.btn-primary(type='Submit') Create Ticket
+            |             
+            .home-create-ticket-message
+              - if (message.length >= 1)
+                div#success-message.alert.alert-success= message
+                script
+                  |setTimeout(function() {
+                  |  $('#success-message').fadeOut('slow');
+                  |}, 2000);
+  include footer
+  

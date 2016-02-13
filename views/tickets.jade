@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  .notifications.top-left
+  .container
+    .jumbotron
+      .container
+        h1= title
+  .container#tickets
+    - each ticket in tickets
+      include ticket
+
+  include footer

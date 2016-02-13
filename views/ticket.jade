@@ -1,0 +1,109 @@
+.panel.panel-default(id='ticket-#{ticket._id}')
+  .panel-heading
+    h3.panel-title Ticket ##{ticket.number}
+    |     
+    .panel-body
+      .row
+        .col-sm-2.text-left-xs.text-right-md
+          strong Status
+        |             
+        .col-sm-10(id='status#{ticket._id}')
+          - if (ticket.status == 'open')
+            span.label.label-success Open
+          - if (ticket.status == 'closed')
+            span.label.label-danger Closed
+          - if (ticket.status == 'complete')
+            span.label.label-default Complete
+      |         
+      .row
+        .col-sm-2.text-left-xs.text-right-md
+          strong Created
+        |             
+        .col-sm-10 #{ticket.created}
+      |         
+      .row
+        .col-sm-2.text-left-xs.text-right-md
+          strong Department
+        |             
+        .col-sm-10 #{ticket.department}
+      |         
+      .row
+        .col-sm-2.text-left-xs.text-right-md
+          strong Creator
+        |             
+        .col-sm-10 #{ticket.creator}
+      |         
+      .row
+        .col-sm-2.text-left-xs.text-right-md
+          strong Assignee
+        |             
+        .col-sm-10 #{ticket.assignee}
+      |         
+      .row
+        .col-sm-2.text-left-xs.text-right-md
+          strong Subject
+        |             
+        .col-sm-10 #{ticket.subject}
+      |         
+      .row
+        .col-sm-2.text-left-xs.text-right-md
+          strong Issue
+        |             
+        .col-sm-10 #{ticket.issue}
+      | 
+      .row
+        .col-sm-5.pull-right
+          button.btn.btn-default(id='complete#{ticket._id}') Complete
+          script
+            |$(document).ready(function() {
+            |  $('#complete#{ticket._id}').on('click', function () {
+            |    $.post('/tickets/complete/#{ticket._id}', function (d) {
+            |    });
+            |  });
+            |});
+            |$(function () {
+            |  socket.on('ticketStatusChangedToComplete', function (data) {
+            |    if (data.id == '#{ticket._id}')
+            |      $('#status' + data.id).fadeOut('slow', function() {
+            |        $('#status'+ data.id).load(location.href+' #status' + data.id + '>*','', function () {
+            |          $('#status' + data.id).fadeIn('slow');
+            |        });
+            |      });
+            |  });
+            |});
+          button.btn.btn-success(id='reopen#{ticket._id}') Reopen
+          script
+            |$(document).ready(function() {
+            |  $('#reopen#{ticket._id}').on('click', function () {
+            |    $.post('/tickets/reopen/#{ticket._id}', function (d) {
+            |    });
+            |  });
+            |});
+            |$(function () {
+            |  socket.on('ticketStatusChangedToOpen', function (data) {
+            |    if (data.id == '#{ticket._id}')
+            |      $('#status' + data.id).fadeOut('slow', function() {
+            |        $('#status'+ data.id).load(location.href+' #status' + data.id + '>*','', function () {
+            |          $('#status' + data.id).fadeIn('slow');
+            |        });
+            |      });
+            |  });
+            |});
+          button.btn.btn-danger(id='close#{ticket._id}') Close
+          script
+            |$(document).ready(function() {
+            |  $('#close#{ticket._id}').on('click', function () {
+            |    $.post('/tickets/close/#{ticket._id}', function (d) {
+            |    });
+            |  });
+            |});
+            |$(function () {
+            |  socket.on('ticketStatusChangedToClose', function (data) {
+            |    if (data.id == '#{ticket._id}')
+            |      $('#status' + data.id).fadeOut('slow', function() {
+            |        $('#status'+ data.id).load(location.href+' #status' + data.id + '>*','', function () {
+            |          $('#status' + data.id).fadeIn('slow');
+            |        });
+            |      });
+            |  });
+            |});
