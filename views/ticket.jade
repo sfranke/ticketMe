@@ -107,3 +107,41 @@
             |      });
             |  });
             |});
+          button.btn.btn-info(id='addComment#{ticket._id}') Add comment
+          script
+            |$(document).ready(function() {
+            |  $('#addComment#{ticket._id}').on('click', function () {
+            |    var username = '#{session.user.name}';
+            |    console.log({username: username});
+            |    $('#addComment#{ticket._id}').hide();
+            |    $('#cancelComment#{ticket._id}').show();
+            |    $('#comments#{ticket._id}').load('editComment', function(){
+            |      $('#comments#{ticket._id}').fadeIn('slow');
+            |    });
+            |  });
+            |});
+            |$(function () {
+            |  socket.on('commentUpdate', function (data) {
+            |    $('#cancelComment#{ticket._id}').hide();
+            |    $('#addComment#{ticket._id}').show();
+            |    $('#editComment').fadeOut('slow');
+            |    $.each(data, function (key, value) {
+            |      console.log(key, value);
+            |      $.each(value.comments, function (i, val) {
+            |        console.log(i, val);
+            |        $('#comments#{ticket._id}').append('<p>' + val.timestamp + ' - ' + val.username + ': ' + '<span>' + val.comment + '</span></p><hr />');
+            |      });
+            |    });
+            |  });
+            |});
+          button.btn.btn-info(id='cancelComment#{ticket._id}', style='display: none') Cancel
+          script
+            |$(document).ready(function() {
+            |  $('#cancelComment#{ticket._id}').on('click', function () {
+            |    $('#cancelComment#{ticket._id}').hide();
+            |    $('#addComment#{ticket._id}').show();
+            |    $('#editComment').fadeOut('slow');
+            |  });
+            |});
+      hr
+      .row(id='comments#{ticket._id}', name='#{ticket._id}', style='display:none')

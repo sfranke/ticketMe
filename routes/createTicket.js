@@ -64,6 +64,7 @@ router.post('/', function (req, res, next) {
             two: function(callback) {
                 ticketDetails.status = 'open';
                 ticketDetails.creator = req.session.user.name;
+                ticketDetails.comments = [];
                 callback();
 
             },

@@ -103,3 +103,7 @@ io.on('connect', function (socket) {
   //console.log(colors.bold('Available events:', util.inspect(socket.nsp._events)));
   //console.log(colors.bold('Client count:', socket.server.eio.clientsCount));
 });
+
+io.on('editComment', function (data) {
+  console.log('editComment event handled:', data);
+});

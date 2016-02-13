@@ -1,0 +1,21 @@
+.panel.panel-default#editComment
+  .panel-heading
+    .panel-body
+      form.form-horizontal(method='post')
+        .form-group
+          label.col-sm-2.control-label(for='comment') Comment
+          |                 
+          .col-sm-5
+            textarea#commentContent.form-control(style='height: 100px;', name='comment')
+        |             
+        .form-group
+          .col-sm-offset-2.col-sm-10
+              button.btn.btn-primary(id='addComment', type='button') Add comment
+              script
+                |$('#addComment').on('click', function () {
+                |  var comment = $('#commentContent').val();
+                |  console.log(comment);
+                |  var ticketId = $(this).closest('div[name]').attr('name');
+                |  console.log(ticketId);
+                |  $.post('/editComment', {ticketId: ticketId, comment: comment});
+                |});

@@ -1,7 +1,8 @@
 var database    = exports,
     mongoClient = require('mongodb').MongoClient,
-    ObjectID     = require('mongodb').ObjectID,
+    ObjectID    = require('mongodb').ObjectID,
     util        = require('util');
+    colors      = require('colors');
 
 var uri = 'mongodb://localhost:27017/Bugreport';
 
@@ -211,4 +212,21 @@ database.getAllTickets = function (callback) {
 
 database.getTickedByTicketNumber = function (ticketNumber, callback) {
 
+};
+
+database.addComment = function (username, ticketId, comment, callback) {
+    var id = ObjectID(ticketId);
+    var now = unixTime();
+    mongoClient.connect(uri, function (err, db) {
+        var collection = db.collection('tickets');
+        var entry = {timestamp: unixTime(), username: username, comment: comment}
+        collection.find({'_id': id}).limit(1).next(function (error, doc) {
+            if (error) console.log(colors.red(error));
+            doc.comments.push(entry);
+            collection.findOneAndReplace({'_id': id}, doc, function (error, record) {
+                if (error) callback(error, null);
+                callback(null, record);
+            });
+        });
+    });
 };

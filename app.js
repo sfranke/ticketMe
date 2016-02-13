@@ -18,6 +18,7 @@ var logout = require('./routes/logout');
 var users = require('./routes/users');
 var tickets = require('./routes/tickets');
 var createTicket = require('./routes/createTicket');
+var editComment = require('./routes/editComment');
 
 var app = express();
 
@@ -44,6 +45,7 @@ app.use('/logout', logout);
 app.use('/users', users);
 app.use('/tickets', tickets);
 app.use('/createTicket', createTicket);
+app.use('/editComment', editComment);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
