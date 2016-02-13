@@ -5,7 +5,7 @@ var util = require('util');
 var bcrypt   = require('bcrypt');
 
 router.get('/', function (req, res, next) {
-    console.log(req.session);
+    // console.log(req.session);
     res.render('register', { title: 'Register', session: req.session, message: req.flash('signupMessage')});
 });
 
@@ -29,7 +29,7 @@ router.post('/', function (req, res, next) {
 
 function generateHashedPassword (password, callback) {
     var hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(9));
-    console.log('Hashed password:', hashedPassword);
+    // console.log('Hashed password:', hashedPassword);
     callback(null, hashedPassword);
 };
 

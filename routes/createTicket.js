@@ -10,7 +10,7 @@ function unixTime() {
 
 router.get('/', function (req, res, next) {
     
-    console.log('Session:', req.session);
+    // console.log('Session:', req.session);
 
     /* A list of all categories. */
     var category = ['Task', 'Bug'];

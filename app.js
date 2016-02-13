@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var flash = require('connect-flash');
 var io = require('socket.io')();
-var colors   = require('colors');
 
 var routes = require('./routes/index');
 var register = require('./routes/register');

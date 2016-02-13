@@ -7,9 +7,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-    console.log(req.session.user);
+    // console.log(req.session.user);
     req.session.user = null;
-    console.log('session deleted:', req.session);
+    // console.log('session deleted:', req.session);
     res.redirect('/');
 });
 

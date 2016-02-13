@@ -11,8 +11,8 @@ router.post('/', function (req, res, next) {
     if (req.body.email != '' && req.body.name != '' && req.body.password != '') {
         var user = {'name': req.body.name, 'email': req.body.email, 'password': req.body.password};
         database.addNewUser(user, function (error, doc) {
-            console.log('error:', util.inspect(error));
-            console.log('doc:', util.inspect(doc));
+            // console.log('error:', util.inspect(error));
+            // console.log('doc:', util.inspect(doc));
             
             if(error != null) res.json({'status': error});
             res.json({'status': 'success'});

@@ -4,7 +4,7 @@ var database = require('./database');
 
 router.get('/', function(req, res, next) {
 
-    console.log(req.session);
+    // console.log(req.session);
 
     if(!req.session.user) {
         return res.redirect('/register');
@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/delete/:id', function (req, res, next) {
 
-    console.log(req.session);
+    // console.log(req.session);
     // console.log('req.body @users post:', req.params);
 
     if(!req.session.user) {

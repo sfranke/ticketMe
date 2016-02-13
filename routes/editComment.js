@@ -6,7 +6,7 @@ var colors = require('colors');
 
 router.get('/', function (req, res, next) {
 
-    console.log('Session:', req.session);
+    // console.log('Session:', req.session);
     res.render('editComment', { title: 'Edit comment', session: req.session});
 });
 

@@ -4,7 +4,7 @@ var database = require('./database');
 var bcrypt   = require('bcrypt');
 
 router.get('/', function (req, res, next) {
-    console.log('Session:', req.session);
+    // console.log('Session:', req.session);
     res.render('login', { title: 'Express', session: req.session});
 });
 
