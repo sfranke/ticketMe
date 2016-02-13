@@ -17,4 +17,4 @@ Rudimentary ticket management tool.
 - Navigate to its root folder ('/ticketMe').
 - Use 'npm' to install all dependencies.
 - Start the application using 'npm start'.
-- Connect via 'http://localhost:1337/'.
+- Connect via 'http://localhost:3000/'.
